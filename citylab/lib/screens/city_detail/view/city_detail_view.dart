@@ -61,7 +61,6 @@ class _CityDetailViewState extends State<CityDetailView> {
                   children: [
                     DetailRow.string(title: "Population", valueString: "8,804,190"),
                     DetailRow.string(title: "State", valueString: "New York"),
-                    DetailRow.rating(title: "Earthquake Risk", valueWidget: RatingScale(rating: 4)),
                     DetailRow.rating(title: "Earthquake Risk", valueWidget: RatingScale(rating: 3.45)),
                     DetailRow.rating(title: "Earthquake Risk", valueWidget: RatingScale(rating: 3.2)),
                     DetailRow.rating(title: "Earthquake Risk", valueWidget: RatingScale(rating: 0.2)),
