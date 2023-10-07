@@ -13,20 +13,22 @@ class DetailRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          flex: 7,
-          child: Text(
-            "$title:",
-            style: TextStyles.SMALL,
+    return Expanded(
+      child: Row(
+        children: [
+          Expanded(
+            flex: 6,
+            child: Text(
+              "$title:",
+              style: TextStyles.SMALL,
+            ),
           ),
-        ),
-        Expanded(
-          flex: 3,
-          child: valueWidget ?? Text(valueString!, style: TextStyles.SMALL,) 
-        ),
-      ],
+          Expanded(
+            flex: 4,
+            child: valueWidget ?? Text(valueString!, style: TextStyles.SMALL,) 
+          ),
+        ],
+      ),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:citylab/product/widget/background/custom_scaffold.dart';
 import 'package:citylab/product/widget/card/detail_row.dart';
+import 'package:citylab/product/widget/rating/rating_scale.dart';
 import 'package:flutter/material.dart';
 
 import '../../../product/constants/utils/border_radius_constants.dart';
@@ -60,7 +61,15 @@ class _CityDetailViewState extends State<CityDetailView> {
                   children: [
                     DetailRow.string(title: "Population", valueString: "8,804,190"),
                     DetailRow.string(title: "State", valueString: "New York"),
-                    DetailRow.rating(title: "Earthquake Risk", valueWidget: Center())
+                    DetailRow.rating(title: "Earthquake Risk", valueWidget: RatingScale(rating: 4)),
+                    DetailRow.rating(title: "Earthquake Risk", valueWidget: RatingScale(rating: 3.45)),
+                    DetailRow.rating(title: "Earthquake Risk", valueWidget: RatingScale(rating: 3.2)),
+                    DetailRow.rating(title: "Earthquake Risk", valueWidget: RatingScale(rating: 0.2)),
+                    DetailRow.rating(title: "Earthquake Risk", valueWidget: RatingScale(rating: 2.56)),
+                    DetailRow.rating(title: "Earthquake Risk", valueWidget: RatingScale(rating: 2.79)),
+                    DetailRow.rating(title: "Earthquake Risk", valueWidget: RatingScale(rating: 4.8)),
+                    DetailRow.rating(title: "Earthquake Risk", valueWidget: RatingScale(rating: 4)),
+                    DetailRow.rating(title: "Earthquake Risk", valueWidget: RatingScale(rating: 4)),
                   ],
                 ),
               ),
