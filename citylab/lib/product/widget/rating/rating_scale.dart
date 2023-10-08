@@ -22,10 +22,6 @@ class RatingScale extends StatelessWidget {
     }
     emptyStars = starCount - fullStars;
     if (isLastHalf) emptyStars--;
-
-    print(fullStars);
-    print(emptyStars);
-    print(isLastHalf);
   }
 
   @override

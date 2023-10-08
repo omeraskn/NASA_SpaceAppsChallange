@@ -1,5 +1,6 @@
 import 'package:citylab/product/navigation/navigation_constants.dart';
 import 'package:citylab/screens/city_detail/view/city_detail_view.dart';
+import 'package:citylab/screens/city_detail/view/hcity_detail_view.dart';
 import 'package:citylab/screens/home/view/home_view.dart';
 import 'package:citylab/screens/order_stats/view/order_stats_view.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,9 @@ class RouteGenerator {
         
       case NavigationConstants.CITY_DETAIL_VIEW:
         return MaterialPageRoute(builder: (_) => const CityDetailView());
+        
+      case NavigationConstants.HCITY_DETAIL_VIEW:
+        return MaterialPageRoute(builder: (_) => const HCityDetailView());
 
       default:
         return _errorRoute();

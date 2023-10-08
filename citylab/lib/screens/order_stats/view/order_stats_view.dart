@@ -6,27 +6,33 @@ import 'package:citylab/product/constants/utils/padding_constants.dart';
 import 'package:citylab/product/constants/utils/text_styles.dart';
 import 'package:citylab/product/widget/background/custom_scaffold.dart';
 import 'package:citylab/product/widget/buttons/custom_fill_button.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
+import '../../../core/base/view/base_view.dart';
 import '../../../product/navigation/navigation_constants.dart';
+import '../viewmodel/order_stats_viewmodel.dart';
 
 class OrderStatsView extends StatefulWidget {
-  OrderStatsView({super.key});
-  final List<String> items = [
-    "Clients",
-    "Designer",
-    "Developer",
-    "Director",
-    "Employee",
-    "Manager",
-    "Worker",
-  ];
+  const OrderStatsView({super.key});
+
   @override
   State<OrderStatsView> createState() => _OrderStatsViewState();
 }
 
 class _OrderStatsViewState extends BaseState<OrderStatsView> {
+  late OrderStatsViewModel viewModel;
   @override
   Widget build(BuildContext context) {
+    return BaseStatefulView<OrderStatsViewModel>(
+        viewModel: OrderStatsViewModel(),
+        onModelReady: (model) {
+          model.setContext(context);
+          viewModel = model;
+        },
+        onPageBuilder: (context, value) => buildPage(context));
+  }
+
+  Widget buildPage(BuildContext context) {
     return CustomScaffold(
       child: Column(
         children: [
@@ -55,48 +61,36 @@ class _OrderStatsViewState extends BaseState<OrderStatsView> {
                           canvasColor: Colors.transparent,
                           shadowColor: Colors.transparent,
                         ),
-                        child: ReorderableListView(
-                          physics: const NeverScrollableScrollPhysics(),
-                          buildDefaultDragHandles: false,
-                          children: <Widget>[
-                            for (int index = 0;
-                                index < widget.items.length;
-                                index++)
-                              ReorderableDragStartListener(
-                                index: index,
-                                key: ValueKey(widget.items[index]),
-                                child: Card(
-                                  color: Colors.transparent,
-                                  elevation: 0,
-                                  margin: AppPaddings.MEDIUM_H +
-                                      AppPaddings.SMALL_V,
-                                  child: ListTile(
-                                    horizontalTitleGap: 0,
-                                    leading: const Icon(
-                                      Icons.menu_rounded,
-                                      color: AssetColors.PRIMARY_COLOR,
+                        child: Observer(builder: (_) {
+                          return ReorderableListView(
+                              onReorder: viewModel.onReorder,
+                              children: <Widget>[
+                                for (int index = 0;
+                                    index < viewModel.stats.length;
+                                    index++)
+                                  Card(
+                                    key: ValueKey(viewModel.stats[index]),
+                                    color: Colors.transparent,
+                                    elevation: 0,
+                                    margin: AppPaddings.MEDIUM_H +
+                                        AppPaddings.SMALL_V,
+                                    child: ListTile(
+                                      horizontalTitleGap: 0,
+                                      leading: const Icon(
+                                        Icons.menu_rounded,
+                                        color: AssetColors.PRIMARY_COLOR,
+                                      ),
+                                      tileColor: SurfaceColors.LISTILE_COLOR,
+                                      title: Text(
+                                        viewModel.stats[index],
+                                        style: TextStyles.SMALL,
+                                      ),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: AppBorderRadius.MEDIUM),
                                     ),
-                                    tileColor: SurfaceColors.LISTILE_COLOR,
-                                    title: Text(
-                                      widget.items[index],
-                                      style: TextStyles.SMALL,
-                                    ),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: AppBorderRadius.MEDIUM),
                                   ),
-                                ),
-                              ),
-                          ],
-                          onReorder: (oldIndex, newIndex) {
-                            setState(() {
-                              if (newIndex > oldIndex) {
-                                newIndex -= 1;
-                              }
-                              final items = widget.items.removeAt(oldIndex);
-                              widget.items.insert(newIndex, items);
-                            });
-                          },
-                        ),
+                              ]);
+                        }),
                       ),
                     ),
                   ),
@@ -112,8 +106,10 @@ class _OrderStatsViewState extends BaseState<OrderStatsView> {
                 textStyle: TextStyles.BUTTON_MEDIUM,
                 backgroundcolor: SurfaceColors.BUTTON_PRIMARY_COLOR,
                 padding: AppPaddings.MEDIUM_V + AppPaddings.LARGE_H,
-                onTap: () => Navigator.of(context)
-                    .pushNamed(NavigationConstants.CITY_DETAIL_VIEW),
+                onTap: () {
+                  Navigator.of(context)
+                    .pushNamed(NavigationConstants.CITY_DETAIL_VIEW);
+                } ,
               ),
             ),
           ),

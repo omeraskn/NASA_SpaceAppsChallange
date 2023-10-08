@@ -8,7 +8,17 @@ import 'package:flutter/material.dart';
 import '../../navigation/navigation_constants.dart';
 
 class PopularCityCard extends StatelessWidget {
-  const PopularCityCard({super.key});
+  final String imagePath;
+  final String cityName;
+  final int population;
+  final String stateName;
+  final void Function() onTap;
+  const PopularCityCard(
+      {super.key,
+      required this.cityName,
+      required this.population,
+      required this.stateName,
+      required this.imagePath, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +35,7 @@ class PopularCityCard extends StatelessWidget {
             flex: 5,
             child: ClipRRect(
               borderRadius: AppBorderRadius.MEDIUM,
-              child: Image.network(
-                "https://picsum.photos/500",
-              ),
+              child: Image.asset(imagePath,),
             ),
           ),
           const Spacer(),
@@ -37,17 +45,17 @@ class PopularCityCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
-                  "New York City",
+                  cityName,
                   style:
                       TextStyles.MEDIUM.copyWith(fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 20),
-                const Text(
-                  "Population: 8,804,190",
+                Text(
+                  "Population: $population",
                   style: TextStyles.SMALL,
                 ),
-                const Text(
-                  "State: New York ",
+                Text(
+                  "Capital: $stateName",
                   style: TextStyles.SMALL,
                 ),
                 const SizedBox(height: 10),
@@ -58,8 +66,7 @@ class PopularCityCard extends StatelessWidget {
                     textStyle: TextStyles.BUTTON_SMALL,
                     backgroundcolor: SurfaceColors.BUTTON_PRIMARY_COLOR,
                     padding: AppPaddings.SMALL_V + AppPaddings.MEDIUM_H,
-                    onTap: () => Navigator.of(context)
-                        .pushNamed(NavigationConstants.CITY_DETAIL_VIEW),
+                    onTap: onTap,
                   ),
                 )
               ],

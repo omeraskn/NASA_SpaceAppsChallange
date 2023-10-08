@@ -38,6 +38,8 @@ dependencies:
   mobx: ^2.2.0
   flutter_mobx: ^2.1.0
   build_runner: ^2.4.6
+  csv: ^5.0.2
+  mobx_codegen: ^2.4.0
 
 dev_dependencies:
   flutter_test:
@@ -62,9 +64,19 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/images/newyork.jpg
+    - assets/images/hawaii.jpeg
+    - assets/images/arkansas.jpg
+    - assets/data/rank/aqi_rank.csv
+    - assets/data/rank/crashes_rank.csv
+    - assets/data/rank/death_rate_rank.csv
+    - assets/data/rank/density_rank.csv
+    - assets/data/rank/drug_death_rank.csv
+    - assets/data/rank/electrical_pricing_rank.csv
+    - assets/data/rank/greenspace_rank.csv
+    - assets/data/rank/healthiest_rank.csv
+    - assets/data/rank/water_quality_rank.csv
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -43,9 +43,9 @@ class _HomeViewState extends BaseState<HomeView> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
-                      "Find the best city for you!",
-                      style:
-                          TextStyles.LARGE.copyWith(fontWeight: FontWeight.bold),
+                      "Find the best state for you!",
+                      style: TextStyles.LARGE
+                          .copyWith(fontWeight: FontWeight.bold),
                     ),
                     buildOrderPageButton(context),
                   ],
@@ -58,18 +58,37 @@ class _HomeViewState extends BaseState<HomeView> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "POPULAR CITIES",
+                    "POPULAR STATES",
                     style:
                         TextStyles.LARGE.copyWith(fontWeight: FontWeight.bold),
                   ),
                   Expanded(
-                    child: ListView.builder(
-                      itemCount: 4,
-                      itemBuilder: (BuildContext context, int index) {
-                        return PopularCityCard();
-                      },
-                    ),
-                  ),
+                      child: SingleChildScrollView(
+                        child: Column(
+                                          children: [
+                        PopularCityCard(
+                            cityName: "New York City",
+                            imagePath: "assets/images/newyork.jpg",
+                            population: 37146680,
+                            stateName: "New York",
+                            onTap: () => Navigator.of(context)
+                                .pushNamed(NavigationConstants.CITY_DETAIL_VIEW)),
+                        PopularCityCard(
+                            cityName: "Hawaii",
+                            imagePath: "assets/images/hawaii.jpeg",
+                            population: 1917481,
+                            stateName: "Honolulu",
+                            onTap: () => Navigator.of(context).pushNamed(
+                                NavigationConstants.HCITY_DETAIL_VIEW)),
+                        PopularCityCard(
+                            cityName: "Arkansas",
+                            imagePath: "assets/images/arkansas.jpg",
+                            population: 2689595,
+                            stateName: "Little Rock",
+                            onTap: () {}),
+                                          ],
+                                        ),
+                      )),
                 ],
               ),
             )

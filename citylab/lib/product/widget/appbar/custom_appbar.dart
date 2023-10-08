@@ -24,7 +24,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       iconTheme: const IconThemeData(color: AssetColors.SECONDARY_COLOR),
       centerTitle: true,
       title: Text(
-        "CITYLAB",
+        "STATELAB",
         style: TextStyles.APP_NAME.copyWith(fontWeight: FontWeight.bold),
       ),
       elevation: 0,
